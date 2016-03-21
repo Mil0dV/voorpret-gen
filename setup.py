@@ -10,7 +10,7 @@ config = {
     'download_url': 'Where to download it.',
     'author_email': 'milo@xdh.nl',
     'version': '0.1',
-    'install_requires': ['nose, spotipy'],
+    'install_requires': ['nose', 'spotipy'],
     'packages': ['voorpretgen'],
     'scripts': [],
     'name': 'voorpretgen'
