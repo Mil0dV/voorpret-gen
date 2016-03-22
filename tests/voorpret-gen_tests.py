@@ -1,5 +1,6 @@
 from nose.tools import *
-from voorpretgen import file
+import voorpretgen
+from voorpretgen import filemanager
 import unittest
 import pprint
 
@@ -16,6 +17,5 @@ class TestVoorpretgen(unittest.TestCase):
 
     def test_file_read(self):
         file_path = 'tests/lineup.txt'
-        x = file.readlines(file_path)
-        print len(x)
-        self.assertTrue(len(x) == 2)
+        result = filemanager.readlines(file_path)
+        self.assertTrue(len(result) == 2)
