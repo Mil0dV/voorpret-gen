@@ -1,6 +1,5 @@
 *.pyc
 *.pyo
-voorpretgen.ini
 build/
 dist/
 *.egg-info/
