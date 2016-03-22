@@ -16,6 +16,6 @@ def test_basic():
 class TestVoorpretgen(unittest.TestCase):
 
     def test_file_read(self):
-        file_path = 'tests/lineup.txt'
+        file_path = 'tests/lineup-test.txt'
         result = filemanager.readlines(file_path)
         self.assertTrue(len(result) == 2)
