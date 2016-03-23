@@ -18,5 +18,5 @@ class TestVoorpretgen(unittest.TestCase):
 
     def test_file_read(self):
         file_path = 'tests/lineup-test.txt'
-        result = filemanager.readlines(file_path)
-        self.assertTrue(len(result) == 2)
+        result = filemanager.lineup_parser(file_path)
+        self.assertTrue(result == ['audiotist', 'larry de kat', 'madonna', 'interr ferenc'])

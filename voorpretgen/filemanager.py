@@ -1,5 +1,10 @@
-def readlines(file_path):
-    # todo size check -> > X KB -> error
-    l = open(file_path)
-    # todo regex om newlines eruit te slopen
-    return l.readlines()
+def lineup_parser(file_path):
+    result = []
+    with open(file_path) as f_in:
+        lines = (line.rstrip() for line in f_in)
+        lines = list(line for line in lines if line)
+        for x in lines:
+            result.append(x.lower())
+        print 'lines ==' , result
+
+    return result
