@@ -56,9 +56,30 @@ def artist_id_list_gen(artist_list):
     return artist_id_list
 
 def tracklist_gen(artist_id_list, n):
-    artist_top_tracks(artist_id, country='US')
+    # expects list of artist id's and an integer for how many tracks per artists, maximum == 10!
+    # returns a list of top track id's
+    country_code = 'NL'
+    spotify = spotipy.Spotify()
+    top_tracks = []
+    # for each artist id, get the top track search results
+    n = 4
+    for artist_id in artist_id_list:
+        top_tracks.append(spotify.artist_top_tracks(artist_id, country=country_code))
 
-    return 0
+    # for each top track search result, get all the track id's within and append them
+    top_track_ids = []
+    for x in top_tracks:
+        count = 0
+        for x in x[u'tracks']:
+            count += 1
+            if count <= n:
+                top_track_ids.append(x[u'id'])
+    # print spotify.track(top_track_ids[0])
+    # print spotify.track(top_track_ids[5])
+    # print top_track_ids
+    # print 'len =' , len(top_track_ids)
+    return top_track_ids
+    # return 0
 
 def write_playlist(track_id_list):
     pass

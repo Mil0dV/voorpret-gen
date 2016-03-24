@@ -45,5 +45,5 @@ class TestVoorpretgen(unittest.TestCase):
         file_path = 'tests/lineup-test.txt'
         lineup = filemanager.lineup_parser(file_path)
         artist_id_list = spotify.artist_id_list_gen(lineup)
-        result = tracklist_gen(artist_id_list, 5)
+        result = spotify.tracklist_gen(artist_id_list, 5)
         self.assertTrue(type(result) == list)
