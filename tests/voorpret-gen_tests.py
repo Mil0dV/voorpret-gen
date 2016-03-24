@@ -3,6 +3,7 @@ from nose.tools import *
 import voorpretgen
 from voorpretgen import filemanager
 from voorpretgen import main
+from voorpretgen import spotify
 import unittest
 import pprint
 
@@ -17,6 +18,7 @@ def test_basic():
 
 class TestVoorpretgen(unittest.TestCase):
 
+
     def test_file_read(self):
         file_path = 'tests/lineup-test.txt'
         result = filemanager.lineup_parser(file_path)
@@ -28,7 +30,13 @@ class TestVoorpretgen(unittest.TestCase):
         # Couldn't get this to work though it should, therefore;
         pass
 
-def test_init_read(self):
+    def test_init_read(self):
         file_path = 'voorpretgen/voorpretgen.ini'
         result = filemanager.read_settings(file_path)
         self.assertTrue(len(result.values()) == 4)
+
+    def test_artist_id_list_gen(self):
+        file_path = 'tests/lineup-test.txt'
+        lineup = filemanager.lineup_parser(file_path)
+        result = spotify.artist_list_gen(lineup, 5)
+        self.assertTrue(type(result) == list)
