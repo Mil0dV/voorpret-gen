@@ -12,10 +12,12 @@ def lineup_parser(file_path):
     return result
 
 def read_settings(file_path):
-    # reads ini file and returns variables as key-value pairs, where key is type of variable
+    # reads ini file and returns variables in a list of strings
     docum = open(file_path)
     lines = docum.readlines()
+    result = []
     for x in lines:
         if x[0] == "[":
-            lines.remove(x)
-    return {'topX':lines[0], 'SPOTIPY_CLIENT_ID':lines[1], 'SPOTIPY_CLIENT_SECRET':lines[2], 'SPOTIPY_REDIRECT_URI':lines[3]}
+            next
+        else: result.append(x.split('=')[1])
+    return result
