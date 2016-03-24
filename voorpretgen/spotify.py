@@ -62,7 +62,6 @@ def tracklist_gen(artist_id_list, n):
     spotify = spotipy.Spotify()
     top_tracks = []
     # for each artist id, get the top track search results
-    n = 4
     for artist_id in artist_id_list:
         top_tracks.append(spotify.artist_top_tracks(artist_id, country=country_code))
 
