@@ -55,9 +55,10 @@ def artist_id_list_gen(artist_list):
 
     return artist_id_list
 
-def top_tracklist_gen(artist_id_list)
-    # artist_top_tracks(artist_id, country='US')
-    pass
+def tracklist_gen(artist_id_list, n):
+    artist_top_tracks(artist_id, country='US')
+
+    return 0
 
 def write_playlist(track_id_list):
     pass

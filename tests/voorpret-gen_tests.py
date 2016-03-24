@@ -38,5 +38,12 @@ class TestVoorpretgen(unittest.TestCase):
     def test_artist_id_list_gen(self):
         file_path = 'tests/lineup-test.txt'
         lineup = filemanager.lineup_parser(file_path)
-        result = spotify.artist_list_gen(lineup, 5)
+        result = spotify.artist_id_list_gen(lineup)
+        self.assertTrue(type(result) == list)
+
+    def test_tracklist_gen(self):
+        file_path = 'tests/lineup-test.txt'
+        lineup = filemanager.lineup_parser(file_path)
+        artist_id_list = spotify.artist_id_list_gen(lineup)
+        result = tracklist_gen(artist_id_list, 5)
         self.assertTrue(type(result) == list)
