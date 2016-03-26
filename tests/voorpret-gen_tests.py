@@ -33,7 +33,7 @@ class TestVoorpretgen(unittest.TestCase):
     def test_init_read(self):
         file_path = 'voorpretgen/voorpretgen.ini'
         result = filemanager.read_settings(file_path)
-        self.assertTrue(len(result.values()) == 4)
+        self.assertTrue(len(result) == 4)
 
     def test_artist_id_list_gen(self):
         file_path = 'tests/lineup-test.txt'
@@ -47,3 +47,10 @@ class TestVoorpretgen(unittest.TestCase):
         artist_id_list = spotify.artist_id_list_gen(lineup)
         result = spotify.tracklist_gen(artist_id_list, 5)
         self.assertTrue(type(result) == list)
+
+
+    def test_user_authentication(self):
+        file_path = 'voorpretgen/voorpretgen.ini'
+        settings = filemanager.read_settings(file_path)
+        result = spotify.user_authentication(username, settings[1:])
+        self.assertTrue(result == None)
