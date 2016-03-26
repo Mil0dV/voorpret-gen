@@ -16,7 +16,9 @@ def read_settings(file_path):
     # the order is topX[0],  SPOTIPY_CLIENT_ID[1], SPOTIPY_CLIENT_SECRET[2], SPOTIPY_REDIRECT_URI[3]
     docum = open(file_path)
     lines = docum.readlines()
+    result = []
     for x in lines:
         if x[0] == "[":
-            lines.remove(x)
-    return [lines[0],lines[1],lines[2],lines[3]]
+            next
+        else: result.append(x.split('=')[1])
+    return result

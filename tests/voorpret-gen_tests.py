@@ -30,10 +30,10 @@ class TestVoorpretgen(unittest.TestCase):
         # Couldn't get this to work though it should, therefore;
         pass
 
-    def test_init_read(self):
-        file_path = 'voorpretgen/voorpretgen.ini'
+    def test_read_settings(self):
+        file_path = 'tests/voorpretgen-test.ini'
         result = filemanager.read_settings(file_path)
-        self.assertTrue(len(result) == 4)
+        self.assertTrue(int(result[0]) == 3)
 
     def test_artist_id_list_gen(self):
         file_path = 'tests/lineup-test.txt'
