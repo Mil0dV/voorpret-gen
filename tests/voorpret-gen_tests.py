@@ -52,5 +52,6 @@ class TestVoorpretgen(unittest.TestCase):
     def test_user_authentication(self):
         file_path = 'voorpretgen/voorpretgen.ini'
         settings = filemanager.read_settings(file_path)
+        username = 'milowinterburn'
         result = spotify.user_authentication(username, settings[1:])
         self.assertTrue(result == None)

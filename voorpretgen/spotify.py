@@ -2,9 +2,12 @@ import sys
 import spotipy
 import spotipy.util as util
 
-def user_authentication(settings):
-    print settings
-    return 1
+def user_authentication(username, settings):
+    # spotify = spotipy.Spotify()
+    # scope = 'Manage your private playlists'
+    # print username, settings
+    # spotipy.util.prompt_for_user_token(username, scope=scope, client_id=settings[0], client_secret=settings[1], redirect_uri=settings[2])
+    return None
 
 
 def artist_id_list_gen(artist_list):
