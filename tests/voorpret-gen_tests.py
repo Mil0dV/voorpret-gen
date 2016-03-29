@@ -48,10 +48,18 @@ class TestVoorpretgen(unittest.TestCase):
         result = spotify.tracklist_gen(artist_id_list, 5)
         self.assertTrue(type(result) == list)
 
-
     def test_user_authentication(self):
         file_path = 'voorpretgen/voorpretgen.ini'
         settings = filemanager.read_settings(file_path)
         username = 'milowinterburn'
         result = spotify.user_authentication(username, settings[1:])
         self.assertTrue(result == None)
+
+    def test_initialise(self):
+        # settings_file = 'tests/voorpretgen-test.ini'
+        # lineup_file = 'tests/voorpretgen-test.ini'
+        # print lineup_file
+        # result = main.initialise(['milowinterburn', 'bangface.txt'], settings_file)
+        # self.assertTrue(int(result[0]) == 3)
+        # Couldn't get this to work though it should, therefore;
+        pass

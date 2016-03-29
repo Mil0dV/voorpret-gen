@@ -10,6 +10,10 @@ def user_authentication(username, settings):
     return None
 
 
+def get_token(username, client_id, client_secret, redirect_uri):
+    # for now:
+    return 'token'
+
 def artist_id_list_gen(artist_list):
     # expects artists as strings in a list
     # returns list of id's as unicode strings and internally keeps track of search failures
