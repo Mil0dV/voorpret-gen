@@ -71,5 +71,5 @@ def tracklist_gen(artist_id_list, n):
     return top_track_ids
     # return 0
 
-def write_playlist(track_id_list):
+def write_playlist(track_id_list, playlist_name):
     pass
