@@ -11,8 +11,12 @@ def user_authentication(username, settings):
 
 
 def get_token(username, client_id, client_secret, redirect_uri):
+    spotify = spotipy.Spotify()
+    scope = 'manager-private-playlist'
+    token = spotipy.util.prompt_for_user_token(username, scope, client_id, client_secret, redirect_uri)
+    # token = spotipy.util.prompt_for_user_token(username, scope=scope, client_id='89b96a6c44e4455f9a429413dd2e3ede', client_secret='e01289978bd443f4898270bb41273ab7', redirect_uri='http://localhost/')
     # for now:
-    return 'token'
+    return token
 
 def artist_id_list_gen(artist_list):
     # expects artists as strings in a list
