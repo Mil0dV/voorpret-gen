@@ -32,7 +32,8 @@ def initialise(args, settings_file):
     spot_token = get_token(username, client_id, client_secret, redirect_uri)
     top_x_tracks = arguments[1] if arguments[1] else int(top_x_set)
     lineup = lineup_parser(arguments[0])
-    playlist_name = arguments[2]
+    # dit kan nog mooier, breekt nu als de file geen extensie heeft
+    playlist_name = arguments[2] if arguments[2] else arguments[0][:-4]
     return lineup, top_x_tracks, playlist_name, spot_token, username
 
 def main(args):
