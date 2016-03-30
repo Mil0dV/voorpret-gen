@@ -41,9 +41,9 @@ def main(args):
     # is base function for all other functions
     settings_file = 'voorpretgen/voorpretgen.ini'
     lineup, top_x_tracks, playlist_name, spot_token, username = initialise(args, settings_file)
-    artist_ids = artist_id_list_gen(lineup)
+    artist_ids = artist_id_list_gen(lineup, spot_token)
     top_x_tracks = 3
-    track_id_list = tracklist_gen(artist_ids, top_x_tracks)
+    track_id_list = tracklist_gen(artist_ids, top_x_tracks, spot_token)
 
     write_playlist(track_id_list, playlist_name, spot_token, username)
     print 'track_id_list= ',

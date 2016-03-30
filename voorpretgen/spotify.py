@@ -9,7 +9,7 @@ def get_token(username, client_id, client_secret, redirect_uri):
     token = spotipy.util.prompt_for_user_token(username, scope, client_id, client_secret, redirect_uri)
     return token
 
-def artist_id_list_gen(artist_list):
+def artist_id_list_gen(artist_list, spot_token):
     # expects artists as strings in a list
     # returns list of id's as unicode strings and internally keeps track of search failures
 
@@ -18,7 +18,7 @@ def artist_id_list_gen(artist_list):
         # returns the associated ID as unicode, if no spotipy search result returns input name
         i = 0
         l = 1
-        spotify = spotipy.Spotify()
+        spotify = spotipy.Spotify(auth=spot_token)
         # search for artist in spotipy, and assign first result to results
         results = spotify.search(q= 'artist:'+ name, limit = l, offset = i, type='artist')
 
@@ -41,11 +41,11 @@ def artist_id_list_gen(artist_list):
 
     return artist_id_list
 
-def tracklist_gen(artist_id_list, n):
+def tracklist_gen(artist_id_list, n, spot_token):
     # expects list of artist id's and an integer for how many tracks per artists, maximum == 10!
     # returns a list of top track id's
     country_code = 'NL'
-    spotify = spotipy.Spotify()
+    spotify = spotipy.Spotify(auth=spot_token)
     top_tracks = []
     # for each artist id, get the top track search results
     for artist_id in artist_id_list:
@@ -76,5 +76,9 @@ def write_playlist(track_id_list, playlist_name, spot_token, username):
     playlist = spotify.user_playlist_create(username, playlist_name, public=False)
     playlist_id = playlist['id']
     # adds tracks in playlist that was just created
-    spotify.user_playlist_add_tracks(username, playlist_id, track_id_list, position=None)
+    for i in range(len(track_id_list)/100):
+        try:
+            spotify.user_playlist_add_tracks(username, playlist_id, track_id_list[i*100:i+1*100], position=None)
+        except IndexError:
+            spotify.user_playlist_add_tracks(username, playlist_id, track_id_list[i*100:], position=None)
     pass
