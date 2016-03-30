@@ -77,10 +77,14 @@ def tracklist_gen(artist_id_list, n):
     # return 0
 
 def write_playlist(track_id_list, playlist_name, spot_token, username):
-
+    # writes playlist in spotify
+    # initialised in main
+    # returns nothing
     spotify = spotipy.Spotify(auth=spot_token)
     print 'name = ', playlist_name
+    # creates a private playlist in spotify for current user
     playlist = spotify.user_playlist_create(username, playlist_name, public=False)
-    return playlist
-    # spotiy.user_playlist_add_tracks(user, playlist_id, tracks, position=None)
-    # pass
+    playlist_id = playlist['id']
+    # adds tracks in playlist that was just created
+    spotify.user_playlist_add_tracks(username, playlist_id, track_id_list, position=None)
+    pass
