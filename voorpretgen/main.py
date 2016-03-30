@@ -3,7 +3,10 @@ import sys
 from filemanager import *
 from spotify import *
 
+
 def parse_arguments(args):
+    # expects commandline input, two positionals username+lineup_file, two optionals
+    # returns four variables
     parser = argparse.ArgumentParser(
         description='Voorpret-gen - spotify playlist generator based on lineup',
         usage='voorpretgen [options] username lineup_file')
@@ -21,6 +24,8 @@ def parse_arguments(args):
     return lineup_file, top_x_tracks, playlist_name, username
 
 def initialise(args, settings_file):
+    # expects commandline arguments for parse_arguments, and settings_file
+    # returns lineup as list of strings, top tracks and playlist _name
     arguments = parse_arguments(args)
     username = arguments[3]
     top_x_set, client_id, client_secret, redirect_uri = read_settings(settings_file)
@@ -31,6 +36,8 @@ def initialise(args, settings_file):
     return lineup, top_x_tracks, playlist_name
 
 def main(args):
+    # expects commandline arguments for initialise
+    # is base function for all other functions
     settings_file = 'voorpretgen/voorpretgen.ini'
     lineup, top_x_tracks, playlist_name = initialise(args, settings_file)
     artist_ids = artist_id_list_gen(lineup)
@@ -41,4 +48,5 @@ def main(args):
     print track_id_list
 
 if __name__ == "__main__":
+    # initialises this file, exits system after calling upon main with commandline arguments
     sys.exit(main(sys.argv[1:]))
