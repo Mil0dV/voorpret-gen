@@ -50,5 +50,5 @@ def main(args):
     print track_id_list
 
 if __name__ == "__main__":
-    # initialises this file, exits system after calling upon main with commandline arguments
+    # initialises this file, exits to system after calling main with commandline arguments
     sys.exit(main(sys.argv[1:]))
