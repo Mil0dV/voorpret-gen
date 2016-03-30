@@ -20,5 +20,5 @@ def read_settings(file_path):
     for x in lines:
         if x[0] == "[":
             next
-        else: result.append(x.split('=')[1])
+        else: result.append(x.split('=')[1][:-2])
     return result
