@@ -1,6 +1,7 @@
 import sys
 import spotipy
 import spotipy.util as util
+from main import *
 
 def user_authentication(username, settings):
     # spotify = spotipy.Spotify()
@@ -16,6 +17,7 @@ def get_token(username, client_id, client_secret, redirect_uri):
     # token = spotipy.util.prompt_for_user_token(username, scope, client_id, client_secret, redirect_uri)
     token = spotipy.util.prompt_for_user_token(username, scope=scope, client_id='89b96a6c44e4455f9a429413dd2e3ede', client_secret='e01289978bd443f4898270bb41273ab7', redirect_uri='http://localhost/')
     # for now:
+    print token
     return token
 
 def artist_id_list_gen(artist_list):
@@ -75,5 +77,11 @@ def tracklist_gen(artist_id_list, n):
     return top_track_ids
     # return 0
 
-def write_playlist(track_id_list, playlist_name):
-    pass
+def write_playlist(track_id_list, playlist_name, spot_token, username):
+
+    spotify = spotipy.Spotify(auth=spot_token)
+    print 'name = ', playlist_name
+    playlist = spotify.user_playlist_create(username, playlist_name, public=False)
+    return playlist
+    # spotiy.user_playlist_add_tracks(user, playlist_id, tracks, position=None)
+    # pass

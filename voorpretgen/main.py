@@ -33,17 +33,18 @@ def initialise(args, settings_file):
     top_x_tracks = arguments[1] if arguments[1] else int(top_x_set)
     lineup = lineup_parser(arguments[0])
     playlist_name = arguments[2]
-    return lineup, top_x_tracks, playlist_name
+    return lineup, top_x_tracks, playlist_name, spot_token, username
 
 def main(args):
     # expects commandline arguments for initialise
     # is base function for all other functions
     settings_file = 'voorpretgen/voorpretgen.ini'
-    lineup, top_x_tracks, playlist_name = initialise(args, settings_file)
+    lineup, top_x_tracks, playlist_name, spot_token, username = initialise(args, settings_file)
     artist_ids = artist_id_list_gen(lineup)
     top_x_tracks = 3
     track_id_list = tracklist_gen(artist_ids, top_x_tracks)
-    write_playlist(track_id_list, playlist_name)
+
+    write_playlist(track_id_list, playlist_name, spot_token, username)
     print 'track_id_list= ',
     print track_id_list
 

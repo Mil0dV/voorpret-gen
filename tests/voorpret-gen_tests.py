@@ -63,3 +63,20 @@ class TestVoorpretgen(unittest.TestCase):
         # self.assertTrue(int(result[0]) == 3)
         # Couldn't get this to work though it should, therefore;
         pass
+
+    def test_get_token(self):
+        username = 'milowinterburn'
+        file_path = 'voorpretgen/voorpretgen.ini'
+        result = filemanager.read_settings(file_path)
+        spotify.get_token(username, result[1], result[2], result[3])
+        self.assertTrue(True)
+
+    def test_write_playlist(self):
+        file_path = 'tests/lineup-test.txt'
+        lineup = filemanager.lineup_parser(file_path)
+        artist_id_list = spotify.artist_id_list_gen(lineup)
+        track_id_list = spotify.tracklist_gen(artist_id_list, 5)
+        playlist_name = 'test'
+        username = 'milowinterburn'
+        spotify.write_playlist(track_id_list, playlist_name, username)
+        self.assertTrue(True)
