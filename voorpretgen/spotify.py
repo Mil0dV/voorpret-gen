@@ -3,20 +3,10 @@ import spotipy
 import spotipy.util as util
 from main import *
 
-def user_authentication(username, settings):
-    # spotify = spotipy.Spotify()
-    # scope = 'Manage your private playlists'
-    # print username, settings
-    # spotipy.util.prompt_for_user_token(username, scope=scope, client_id=settings[0], client_secret=settings[1], redirect_uri=settings[2])
-    return None
-
-
 def get_token(username, client_id, client_secret, redirect_uri):
     spotify = spotipy.Spotify()
     scope = 'playlist-modify-private'
-    # token = spotipy.util.prompt_for_user_token(username, scope, client_id, client_secret, redirect_uri)
-    token = spotipy.util.prompt_for_user_token(username, scope=scope, client_id='89b96a6c44e4455f9a429413dd2e3ede', client_secret='e01289978bd443f4898270bb41273ab7', redirect_uri='http://localhost/')
-    # for now:
+    token = spotipy.util.prompt_for_user_token(username, scope, client_id, client_secret, redirect_uri)
     return token
 
 def artist_id_list_gen(artist_list):

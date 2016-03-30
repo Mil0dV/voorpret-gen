@@ -20,5 +20,8 @@ def read_settings(file_path):
     for x in lines:
         if x[0] == "[":
             next
-        else: result.append(x.split('=')[1][:-2])
+
+        # this monster a) splits on '=', then selects the 2nd element, strips
+        # newlines and '-s
+        else: result.append(x.split('=')[1].rstrip().replace("'", ""))
     return result
