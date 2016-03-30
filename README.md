@@ -4,7 +4,7 @@ Setup:
 - git clone
 - python setup.py install (might need sudo)
 
-usage: voorpretgen [options] username lineup_file
+usage: python voorpretgen/main.py [options] username lineup_file
 
 positional arguments:
   username         Spotify username
