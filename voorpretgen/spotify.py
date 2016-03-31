@@ -2,6 +2,9 @@ import sys
 import spotipy
 import spotipy.util as util
 from main import *
+import time
+
+
 
 def get_token(username, client_id, client_secret, redirect_uri):
     spotify = spotipy.Spotify()
@@ -14,6 +17,7 @@ def artist_id_list_gen(artist_list, spot_token):
     # returns list of id's as unicode strings and internally keeps track of search failures
 
     def get_artist_id(name):
+        print "init get_artist_id", time.clock()
         # expects artist name as string
         # returns the associated ID as unicode, if no spotipy search result returns input name
         i = 0
@@ -24,9 +28,11 @@ def artist_id_list_gen(artist_list, spot_token):
 
         try:
             # search for id in results
+            print "exit get_artist_id", time.clock()
             return results[u'artists'][u'items'][0][u'id']
         except IndexError:
             # if no results return 0
+            print "exit get_artist_id", time.clock()
             return name
 
     # append ID id_list or name in search_failure list
@@ -42,6 +48,7 @@ def artist_id_list_gen(artist_list, spot_token):
     return artist_id_list
 
 def tracklist_gen(artist_id_list, n, spot_token):
+    print "init tracklist_gen", time.clock()
     # expects list of artist id's and an integer for how many tracks per artists, maximum == 10!
     # returns a list of top track id's
     country_code = 'NL'
@@ -63,23 +70,26 @@ def tracklist_gen(artist_id_list, n, spot_token):
     # print spotify.track(top_track_ids[5])
     # print top_track_ids
     # print 'len =' , len(top_track_ids)
+    print "exit tracklist_gen", time.clock()
     return top_track_ids
     # return 0
 
 def write_playlist(track_id_list, playlist_name, spot_token, username):
+    print "init write_playlist", time.clock()
     # writes playlist in spotify
     # initialised in main
     # returns nothing
     spotify = spotipy.Spotify(auth=spot_token)
-    print 'name = ', playlist_name
+    # print 'name = ', playlist_name
     # creates a private playlist in spotify for current user
     playlist = spotify.user_playlist_create(username, playlist_name, public=False)
     playlist_id = playlist['id']
     # adds tracks in playlist that was just created
     for i in range(len(track_id_list)/100 + 1):
         try:
-            print track_id_list[i*100:i+1*100]
+            # print track_id_list[i*100:i+1*100]
             spotify.user_playlist_add_tracks(username, playlist_id, track_id_list[i*100:i+1*100], position=None)
         except IndexError:
-            print track_id_list[i*100:]
+            # print track_id_list[i*100:]
             spotify.user_playlist_add_tracks(username, playlist_id, track_id_list[i*100:], position=None)
+    print "exit write_playlist", time.clock()
