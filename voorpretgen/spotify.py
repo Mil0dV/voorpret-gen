@@ -76,9 +76,10 @@ def write_playlist(track_id_list, playlist_name, spot_token, username):
     playlist = spotify.user_playlist_create(username, playlist_name, public=False)
     playlist_id = playlist['id']
     # adds tracks in playlist that was just created
-    for i in range(len(track_id_list)/100):
+    for i in range(len(track_id_list)/100 + 1):
         try:
+            print track_id_list[i*100:i+1*100]
             spotify.user_playlist_add_tracks(username, playlist_id, track_id_list[i*100:i+1*100], position=None)
         except IndexError:
+            print track_id_list[i*100:]
             spotify.user_playlist_add_tracks(username, playlist_id, track_id_list[i*100:], position=None)
-    pass
