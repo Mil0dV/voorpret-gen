@@ -16,12 +16,12 @@ def artist_id_list_gen(artist_list, spot_token):
     # expects artists as strings in a list
     # returns list of id's as unicode strings and internally keeps track of search failures
 
-    def get_artist_id(name):
+    def get_artist_id(name, spot_token):
         print "init get_artist_id", time.clock()
         # expects artist name as string
         # returns the associated ID as unicode, if no spotipy search result returns input name
         i = 0
-        l = 1
+        l = 10
         spotify = spotipy.Spotify(auth=spot_token)
         # search for artist in spotipy, and assign first result to results
         results = spotify.search(q= 'artist:'+ name, limit = l, offset = i, type='artist')
@@ -29,17 +29,28 @@ def artist_id_list_gen(artist_list, spot_token):
         try:
             # search for id in results
             print "exit get_artist_id", time.clock()
-            return results[u'artists'][u'items'][0][u'id']
+            temp_list =[]
+
+            for x in range(l):
+                # test if name is exact match,
+                if results[u'artists'][u'items'][x][u'name'].lower() == name:
+                    # return the first exact match
+                    return results[u'artists'][u'items'][x][u'id']
+                else:
+                    # if no return has been hit, append all mismatches in temp_list
+                    temp_list.append(results[u'artists'][u'items'][x][u'id'])
         except IndexError:
-            # if no results return 0
+            # if no results at all (index error) return name
             print "exit get_artist_id", time.clock()
             return name
+        # return the first result of mismatches (this return ony happens when all result are mismatches)
+        return temp_list[0]
 
     # append ID id_list or name in search_failure list
     artist_id_list = []
     artis_fail_search_list = []
     for name in artist_list:
-        x = get_artist_id(name)
+        x = get_artist_id(name, spot_token)
         if type(x) == unicode:
             artist_id_list.append(x)
         else:
